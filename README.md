@@ -9,17 +9,8 @@ Fact-checking by Justification Modelling ”. This will provide a comprehensive 
 the data looks like and its purpose. You don’t need to get an in-depth understanding of the
 methods or architecture that they have used. The goal is to simply understand the problem
 statement and dataset.
-Instructions : This file is a readme for the assignment. All functions and classes have been
-sufficiently described here. Kindly go through this file carefully and follow the step-wise
-instructions to successfully understand and implement this assignment. There are multiple fill in
-the blanks throughout this assignment that you will have to complete which will be evaluated
-disjointly.
-Note : We DO NOT expect you to train the model. The evaluation will be based on
-function-specific test cases and code. However, you are free to try and run the code if you have
-the required computation power and time.
-Important : DO NOT import any extra modules, change any lines of code, rename or edit
-function prototypes, change class names or default values etc. unless specifically asked to do
-so in the evaluative parts. Changing other code may cause the code to break.
+I
+
 System Requirements - Pytorch - Minimum version 1.5.0, 1.6.0 preferable.
 Nltk (pip3 install nltk). Run nltk.download('punkt') before starting.
 Directory Structure (Top-down) :
@@ -53,10 +44,10 @@ parts of the network architecture including the convs2s layers, attention layers
 network and putting it all together in the encoder. Finally, we will write the train function and
 main function that will complete the implementation.
 1. Utils.py :
-Non-evaluative part: the functions - visualize_Attenion(...) and infer(...) are non-essential. If
+the functions - visualize_Attenion(...) and infer(...) are non-essential. If
 someone does train the model, they can uncomment these and use them to infer and visualise
 attention.
-Following are the definitions of the functions you need to implement for evaluation :
+Following are the definitions of the functions:
 I. get_max_length(dataframe: pandas.DataFrame, column_number: int)
 This function is supposed to return the maximum sentence length for all sentences in the
 specified column (specified by column_number) for the given data frame. When the function will
@@ -72,11 +63,9 @@ return a dictionary for which the key is the word and the value is its correspon
 Eg of return value: {"ball": [1,2,3], "bat": [7,8,9] ...}
 2. Datasets.py:
 Beware of NaN values, drop them.
-Non-evaluative : __init__(), __len__(), get_max_lenghts(), get_Data_shape().
-Note : You can (and should) use the variables that have been defined in the _init_() for writing
-the evaluative functions. So go through the _init_ function carefully and understand what each
-line of code is defining.
-Following are the definitions of the functions you need to implement for evaluation:
+__init__(), __len__(), get_max_lenghts(), get_Data_shape().
+
+Following are the definitions of the functions:
 I. __getitem__(self, idx)
 This function gets the data from a specific row in the dataframe (specified by idx) and
 processes and finally converts it to torch tensors which will be usable by the neural model.
@@ -86,7 +75,7 @@ of the data after lower-casing (note- use word_tokenize from nltk).
 2. get the label for the row and convert it to a torch tensor.
 3. Initialise two numpy matrices to zeros. These will be later populated with the word
 vectors. The dimensions should be embedding_dimension x max_len of all
-(statement/justification) [Note: use variables from init to get appropriate dimensions]. The matrix
+(statement/justification) The matrix
 will eventually be such that each column represents a word (by its vector). For eg: "ball bat"
 would be represented as:
 [ 1 7
@@ -109,8 +98,8 @@ dictionary should be:
 "credit_history": <torch_tensor_for_credit_history>
 }
 3. ConvS2S.py
-Non-evaluative : __init__()
-Following are the definitions of the functions you need to implement for evaluation:
+__init__()
+Following are the definitions of the functions:
 I. get_convolutions(self, input_dim, num_layers=3)
 Returns a torch.nn.ModuleList() object which has num_layers of torch.nn.Conv1d(..)
 layers stacked (appended). For each Conv1d layer, input channels are equal to input_dim, the
@@ -123,8 +112,8 @@ torch.nn.functional) with dimension 1, add the output of this activation to the 
 call this obtained_outpout. Finally, the input source for the next convolution should be equal to
 the above obtained_output.
 4. Attention.py
-Non-evaluative : __init__() of both the MultiheadAttention and PositionFeedForward classes
-Following are the definitions of the functions you need to implement for evaluation:
+ __init__() of both the MultiheadAttention and PositionFeedForward classes
+Following are the definitions of the functions:
 I. PositionFeedForward.get_layers(self, hid_dim, feedForward_dim)
 Returns [conv1, conv2]. conv1 is a torch.nn.Conv1d object with input channels equal to
 hidden dimensions, output channels equal to feed_forward_dimension, kernel size as 3, and
@@ -145,7 +134,7 @@ conv_output is the same as the three previous layers, except padding is false (0
 objects and return them in the order as mentioned above. Check _init_() function to see in which
 variables these layers are stored.
 5. Encoder.py
-Evaluative : __init__()
+ __init__()
 Instantiate the required Classes in the __init__() method. The classes are ConvEncoder,
 MultiheadAttention and PositionFeedForward.
 Following are the definitions of the functions you need to implement for evaluation:
@@ -155,8 +144,8 @@ and value are equal to output of the previous step) and finally the PositionFeed
 Use appropriate functions as defined in _init_() with appropriate dimensions. Return the final
 output from the feed-forward layer.
 6. LiarLiar.py
-Non-evaluative : __init__()
-Following are the definitions of the functions you need to implement for evaluation:
+ __init__()
+Following are the definitions of the functions :
 I. get_convolutions(self, input_dim, hidden_dim)
 Returns in order - upsacle_conv, first_cov and flatten_conv. upscale_conv is a
 torch.nn.Conv1d object with input channels equal to input_dims and output channels equal to
@@ -243,8 +232,11 @@ PS - If you run to see if everything is working fine or not, but run out of memo
 dimension and the number of attention heads or number of layers so that they consume lesser
 memory. But the file you submit, we expect you instantiate the classes with the aforementioned
 parameters.
+
+
+
 PART 2
-Aim : To help students understand the working of Particle Swarm Optimization and its basic
+Aim : To help understand the working of Particle Swarm Optimization and its basic
 implementation in python.
 Background: What is Particle Swarm Optimization?
 It’s a powerful evolutionary optimization algorithm, known for its utility and simpleness. If there’s
@@ -284,13 +276,4 @@ functions. First initialises a swarm, each particle having a position, velocity,
 best_position([ ]), and best_cost. Runs for max_iterations. In each iteration, evaluates
 the cost of each particle and updates the group best position accordingly. At the end of
 each iteration, it updates first the velocity and then the position of each particle.
-Submission Instructions:
-● All the completed python files WITHOUT CHANGING ORIGINAL NAMES of the Files
-should be kept in a single folder.
-● DO NOT include the glove file or data files in this folder.
-● The name of this folder should be your id number as: “2017A7PS0040P” and zipped as
-.zip file (Do not use other zip formats).
-● Follow the submission instructions very carefully, otherwise the code may not be
-appropriately evaluated. We WILL NOT CONSIDER RECHECKS if code is not
-evaluated due to improper submission, changed name files or changed function
-prototypes etc.
+
